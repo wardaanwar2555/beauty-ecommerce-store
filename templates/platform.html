@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Loop - Beauty E-commerce Platform</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .top-bar {
+            background-color: #3e3e2d;
+            color: white;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .main-nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #444;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: #8a56e8;
+        }
+        
+        .cta-btn {
+            background-color: #8a2be2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background-color: #7526c3;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(120deg, #e6a8c1 0%, #c086e3 50%, #7b68ee 100%);
+            color: white;
+            padding: 80px 5% 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-content {
+            width: 55%;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 span {
+            display: block;
+        }
+        
+        .hero h1 .highlight {
+            color: #8a2be2;
+            margin-top: 10px;
+            font-size: 70px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: #8a2be2;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .primary-btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 80px 5%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Platform Section */
+        .platform {
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #f0e6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 28px;
+            color: #8a2be2;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: #f8f9fa;
+        }
+        
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            width: calc(33.333% - 20px);
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(120deg, #e6a8c1 0%, #c086e3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .service-icon i {
+            font-size: 30px;
+            color: white;
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .service-card a {
+            color: #8a2be2;
+            font-weight: 600;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .service-card a:after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .service-card a:hover:after {
+            transform: translateX(5px);
+        }
+        
+        /* Resources Section */
+        .resources {
+            background-color: white;
+        }
+        
+        .resources-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #8a2be2;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: #8a2be2;
+            font-weight: 600;
+        }
+        
+        .tab-btn.active:after {
+            transform: scaleX(1);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-image {
+            height: 200px;
+            background-color: #f0e6ff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .resource-content {
+            padding: 25px;
+        }
+        
+        .resource-type {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #f0e6ff;
+            color: #8a2be2;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .resource-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .resource-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .resource-card a {
+            color: #8a2be2;
+            font-weight: 600;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background-color: #f8f9fa;
+        }
+        
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .pricing-toggle span {
+            font-size: 18px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #8a2be2;
+            border-radius: 30px;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        
+        .toggle-switch:before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.yearly:before {
+            transform: translateX(30px);
+        }
+        
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            width: calc(33.333% - 20px);
+            min-width: 300px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card.popular {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid #8a2be2;
+        }
+        
+        .pricing-card.popular:before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8a2be2;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #8a2be2;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-period {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .pricing-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li:before {
+            content: '✓';
+            color: #8a2be2;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .pricing-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background-color: #8a2be2;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .pricing-btn:hover {
+            background-color: #7526c3;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            width: 20%;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: #8a2be2;
+        }
+        
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero h1 .highlight {
+                font-size: 58px;
+            }
+            
+            .features-grid, .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .service-card, .pricing-card {
+                width: calc(50% - 15px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 5%;
+            }
+            
+            .hero-content {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .hero-image {
+                width: 80%;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .features-grid, .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card, .pricing-card {
+                width: 100%;
+            }
+            
+            .footer-column {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <a href="#" class="login-btn">Log In</a>
+        </div>
+        <div class="nav-container">
+            <a href="#" class="logo">Glam Loop</a>
+            <nav class="main-nav">
+                <a href="#platform">Platform</a>
+                <a href="#services">Services</a>
+                <a href="/resources">Resources</a>
+                <a href="#pricing">Pricing</a>
+            </nav>
+            <a href="#" class="cta-btn">REQUEST A DEMO</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Discover Beauty product
+                <span class="highlight">—all in one place</span>
+            </h1>
+            <p>A one-stop online store offering elegant jewelry and premium beauty products to help you shine inside and out</p>
+            <div class="hero-buttons">
+                <button class="primary-btn">START YOUR STORE</button>
+                <button class="secondary-btn">EXPLORE FEATURES</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/api/placeholder/400/400" alt="Ecommerce platform cubes">
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="section platform">
+        <div class="section-header">
+            <h2>Our Platform</h2>
+            <p>Everything you need to create and grow your beauty business online</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>Easy Store Setup</h3>
+                <p>Create your professional beauty store in minutes with our intuitive drag-and-drop builder. No coding required.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Optimized</h3>
+                <p>Your store looks perfect on any device, ensuring customers can shop seamlessly from anywhere.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Sales Analytics</h3>
+                <p>Gain valuable insights with our detailed analytics dashboard to understand customer behavior and grow your business.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>Beautiful Templates</h3>
+                <p>Choose from dozens of professionally designed templates specifically for beauty and jewelry stores.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Shipping Integration</h3>
+                <p>Connect with major shipping carriers to provide accurate shipping rates and tracking information.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Secure Payments</h3>
+                <p>Accept payments with confidence using our secure payment processing system with multiple payment options.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive support to help your beauty business thrive</p>
+        </div>
+        <div class="services-container">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Marketing Support</h3>
+                <p>Drive traffic and convert visitors with our built-in SEO tools, email marketing, and social media integration.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Customer Support</h3>
+                <p>Our dedicated team is always available to help you solve any technical issues and answer your questions.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Product Photography</h3>
+                <p>Showcase your products with professional photography services designed specifically for beauty products.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>SEO Optimization</h3>
+                <p>Get found online with our advanced SEO tools and expert guidance to improve your search rankings.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>Social Media Management</h3>
+                <p>Expand your reach with integrated social media tools and professional management services.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Custom Development</h3>
+                <p>Need something unique? Our developers can create custom features tailored to your specific needs.</p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section resources">
+        <div class="section-header">
+            <h2>Resources</h2>
+            <p>Learn how to grow your beauty business with our expert guides and tools</p>
+        </div>
+        <div class="resources-tabs">
+            <button class="tab-btn active">All Resources</button>
+            <button class="tab-btn">Guides</button>
+            <button class="tab-btn">Videos</button>
+            <button class="tab-btn">Templates</button>
+            <button class="tab-btn">Webinars</button>
+        </div>
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-image">
+                     <img src="{{ url_for('static', filename='images/f1.jpg') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    <span class="resource-type">Guide</span>
+                    <h3>Beauty E-commerce SEO Strategy</h3>
+                    <p>Learn how to optimize your beauty store for search engines and attract more organic traffic.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-image">
+                      <img src="{{ url_for('static', filename='images/f2.jpg') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    <span class="resource-type">Video</span>
+                    <h3>Product Photography Tips</h3>
+                    <p>Professional tips for capturing stunning product photos that sell your beauty products effectively.</p>
+                    <a href="#">Watch Now →</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-image">
+                      <img src="{{ url_for('static', filename='images/f4.jpg') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    <span class="resource-type">Template</span>
+                    <h3>Email Marketing Templates</h3>
+                    <p>Ready-to-use email templates for newsletters, promotions, and customer engagement.</p>
+                    <a href="#">Download →</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-image">
+                       <img src="{{ url_for('static', filename='images/f5.png') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    <span class="resource-type">Webinar</span>
+                    <h3>Social Media Strategies for Beauty Brands</h3>
+                    <p>Learn how to leverage Instagram, TikTok, and other platforms to grow your beauty business.</p>
+                    <a href="#">Watch Recording →</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-image">
+                     <img src="{{ url_for('static', filename='images/f4.png') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    
+                    <span class="resource-type">Guide</span>
+                    <h3>Customer Retention Strategies</h3>
+                    <p>Discover effective techniques to turn first-time buyers into loyal repeat customers.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-image">
+                    <img src="{{ url_for('static', filename='images/f6.jpg') }}" alt="Download Image" width="400">
+                </div>
+                <div class="resource-content">
+                    <span class="resource-type">Template</span>
+                    <h3>Product Description Framework</h3>
+                    <p>Templates and examples for writing compelling beauty product descriptions that convert.</p>
+                    <a href="#">Download →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+   </body>
+   </html>

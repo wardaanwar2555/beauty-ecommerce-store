@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Loop - Beauty E-commerce Services</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .top-bar {
+            background-color: #3e3e2d;
+            color: white;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .main-nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #444;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: #8a56e8;
+        }
+        
+        .main-nav a.active {
+            color: #8a2be2;
+            font-weight: 600;
+        }
+        
+        .main-nav a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #8a2be2;
+        }
+        
+        .cta-btn {
+            background-color: #8a2be2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background-color: #7526c3;
+        }
+        
+        /* Hero Section */
+        .services-hero {
+            background: linear-gradient(120deg, #e6a8c1 0%, #c086e3 50%, #7b68ee 100%);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .services-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .service-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .category-tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .category-tag:hover, .category-tag.active {
+            background-color: white;
+            color: #8a2be2;
+            transform: translateY(-3px);
+        }
+        
+        /* Main Services Section */
+        .main-services {
+            padding: 80px 5%;
+        }
+        
+        .services-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .services-intro h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .services-intro p {
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-image {
+            height: 200px;
+            background: linear-gradient(120deg, #e6a8c1 0%, #c086e3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .service-item:hover .service-image img {
+            opacity: 1;
+        }
+        
+        .service-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon i {
+            font-size: 28px;
+            color: #8a2be2;
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-item h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .service-item p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .service-features {
+            margin-bottom: 25px;
+        }
+        
+        .service-features li {
+            list-style: none;
+            margin-bottom: 10px;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-features li:before {
+            content: '✓';
+            color: #8a2be2;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .service-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #8a2be2;
+        }
+        
+        .service-btn {
+            background-color: #8a2be2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .service-btn:hover {
+            background-color: #7526c3;
+        }
+        
+        /* Service Process */
+        .service-process {
+            background-color: #f0e6ff;
+            padding: 80px 5%;
+        }
+        
+        .process-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .process-header h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .process-header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: linear-gradient(90deg, #e6a8c1, #c086e3, #7b68ee);
+            z-index: 1;
+        }
+        
+        .process-step {
+            width: 25%;
+            text-align: center;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border: 3px solid #8a2be2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .step-icon i {
+            font-size: 32px;
+            color: #8a2be2;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background-color: #8a2be2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .process-step h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .process-step p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 5%;
+            background-color: white;
+        }
+        
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .testimonials-header h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .testimonials-header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        
+        .testimonials-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            min-width: 350px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: start;
+        }
+        
+        .testimonial-quote {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .testimonial-quote:before {
+            content: '"';
+            font-size: 60px;
+            color: #e6a8c1;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.5;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .author-position {
+            color: #8a2be2;
+            font-size: 14px;
+        }
+        
+        .testimonial-rating {
+            color: gold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(120deg, #e6a8c1 0%, #c086e3 50%, #7b68ee 100%);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .cta-btn-primary {
+            background-color: white;
+            color: #8a2be2;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+        }
+        
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            width: 20%;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: #8a2be2;
+        }
+        
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps:before {
+                left: 20%;
+                right: 20%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+            
+            .process-step {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 40px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-column {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <a href="/login" class="login-btn">Log In</a>
+        </div>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Glam Loop</a>
+            <nav class="main-nav">
+                <a href="/platform">Platform</a>
+                <a href="/services" class="active">Services</a>
+                <a href="/resources">Resources</a>
+         
+            </nav>
+            <a href="/" class="cta-btn">REQUEST A DEMO</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    
+        </div>
+    </section>
+<section class="services-hero">
+        <h1>Our Beauty E-commerce Services</h1>
+        <p>Everything you need to launch, manage, and grow your beauty and jewelry business online</p>
+        
+        <div class="service-categories">
+        <a href="#" class="category-tag active">
+  <img src="{{ url_for('static', filename='images/d7.jpg') }}" alt="All" width = 350/>
+  All Services
+</a>
+<a href="#" class="category-tag">
+  <img src="{{ url_for('static', filename='images/d1.jpg') }}" alt="Marketing" />
+  Marketing
+</a>
+<a href="#" class="category-tag">
+  <img src="{{ url_for('static', filename='images/d2.jpg') }}" alt="Store Design" />
+  Store Design
+</a>
+<a href="#" class="category-tag">
+  <img src="{{ url_for('static', filename='images/d3.jpg') }}" alt="Content Creation"  width = 350/>
+  Content Creation
+</a>
+<a href="#" class="category-tag">
+  <img src="{{ url_for('static', filename='images/d6.jpg') }}" alt="Technical Support" width = 350 />
+  Technical Support
+</a>
+<a href="#" class="category-tag">
+  <img src="{{ url_for('static', filename='images/d5.jpg') }}" alt="Business Growth" />
+  Business Growth
+</a>
+
+
+
+    <!-- Main Services Section -->
+    <section class="main-services">
+        <div class="services-intro">
+            <h2>Comprehensive Beauty Business Services</h2>
+            <p>Whether you're launching a new beauty brand or scaling an existing business, our services are tailored to help you succeed in the competitive beauty marketplace.</p>
+        </div>
+        
+       
+    </section>
+
+    <!-- Service Process -->
+    <section class="service-process">
+        <div class="process-header">
+            <h2>How We Work With You</h2>
+            <p>Our simple but effective process ensures we deliver results that help your beauty business thrive</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-icon">
+                    <i class="fas fa-comments"></i>
+                    <div class="step-number">1</div>
+                </div>
+                <h3>Consultation</h3>
+                <p>We start by understanding your beauty brand, goals, and challenges.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="step-number">2</div>
+                </div>
+                <h3>Strategy</h3>
+                <p>We develop a custom strategy tailored to your specific beauty business needs.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">
+                    <i class="fas fa-cogs"></i>
+                    <div class="step-number">3</div>
+                </div>
+                <h3>Implementation</h3>
+                <p>Our experts execute the plan with attention to detail and beauty industry best practices.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="step-number">4</div>
+                </div>
+                <h3>Growth & Optimization</h3>
+                <p>We continuously monitor, analyze, and optimize to maximize your results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-header">
+            <h2>What Our Clients Say</h2>
+            <p>Success stories from beauty brands who have transformed their business with Glam Loop</p>
+        </div>
+        
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Glam Loop's marketing services completely transformed our customer acquisition strategy. Our sales have increased by 137% in just three months!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                       <img src="{{ url_for('static', filename='images/e1.jpg') }}" alt="Business Growth" />
+                    </div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <div class="author-position">Founder, Glow Essentials</div>
+                    </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    The product photography service exceeded our expectations. The images perfectly captured the essence of our jewelry collection and improved our conversion rate significantly.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                 <img src="{{ url_for('static', filename='images/e3.jpg') }}" alt="Business Growth" />
+                    </div>
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <div class="author-position">Co-owner, Luna Jewelry</div>
+                    </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Working with Glam Loop's SEO team has been amazing. We're now ranking on the first page for all our key beauty terms, and organic traffic has increased by 85%.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                       <img src="{{ url_for('static', filename='images/e2.jpg') }}" alt="Business Growth" />
+                    </div>
+                    <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <div class="author-position">Marketing Director, Pure Beauty Co.</div>
+                    </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    The custom store design completely elevated our brand image.
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+                    </body>
+                    </html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup Guide</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #dfb899 0%, #6610f2 100%);
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #e0d9d0;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #8e6b8e;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #8e6b8e;
+            font-size: 1.8rem;
+            margin-top: 40px;
+            border-bottom: 1px solid #e0d9d0;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #8a7e66;
+            font-size: 1.4rem;
+        }
+        .navbar {
+            background-color: #8e6b8e;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #7a5c7a;
+        }
+        .navbar a.active {
+            background-color: #7a5c7a;
+        }
+        .products-section {
+            margin-top: 40px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-details {
+            padding: 15px;
+        }
+        .product-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8e6b8e;
+            margin: 0 0 5px 0;
+        }
+        .product-category {
+            color: #8a7e66;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .add-to-cart {
+            background-color: #8e6b8e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #7a5c7a;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .look-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .look-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #8e6b8e;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+            border-top: 1px solid #e0d9d0;
+        }
+    </style>
+</head>
+<body>
+    <a href="/cart" class="cart-icon">
+    <div class="cart-icon">
+        <div class="cart-count">0</div>
+        🛒
+    </div>
+    </a>
+
+    <header>
+        <h1>Makeup Guide</h1>
+        <p>Your complete resource for makeup products and techniques</p>
+    </header>
+    
+    <div class="navbar">
+        <a href="/skin">Skin Care</a>
+        <a href="/hair">Hair Care</a>
+        <a href="/makeup" class="active">Makeup</a>
+    </div>
+
+    <main>
+        <section id="intro">
+            <h2>Makeup Essentials</h2>
+            <p>Whether you're a makeup beginner or a seasoned pro, having the right products is key to creating stunning looks. Explore our curated collection of high-quality makeup products for every need.</p>
+        </section>
+
+        <section class="products-section">
+            <h2>Face Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/c1.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Flawless Finish Foundation</h4>
+                        <p class="product-category">Foundation</p>
+                        <p class="product-description">Medium to full coverage with a natural satin finish. Long-wearing and suitable for all skin types.</p>
+                        <p class="product-price">$38.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                      <img src="{{ url_for('static', filename='images/c2.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Radiant Creamy Concealer</h4>
+                        <p class="product-category">Concealer</p>
+                        <p class="product-description">Brightens and corrects with medium-buildable coverage. Creamy texture that doesn't crease.</p>
+                        <p class="product-price">$29.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                      <img src="{{ url_for('static', filename='images/c3.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Translucent Setting Powder</h4>
+                        <p class="product-category">Powder</p>
+                        <p class="product-description">Lightweight, silky powder that sets makeup without looking cakey or adding color.</p>
+                        <p class="product-price">$32.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                         <img src="{{ url_for('static', filename='images/c4.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Soft Glow Blush</h4>
+                        <p class="product-category">Blush</p>
+                        <p class="product-description">Silky powder blush that adds a natural flush of color with a subtle luminosity.</p>
+                        <p class="product-price">$24.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2>Eye Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='images/c5.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Neutral Eyeshadow Palette</h4>
+                        <p class="product-category">Eyeshadow</p>
+                        <p class="product-description">12 highly-pigmented neutral shades in matte and shimmer finishes for endless eye looks.</p>
+                        <p class="product-price">$45.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/c6.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Volumizing Mascara</h4>
+                        <p class="product-category">Mascara</p>
+                        <p class="product-description">Adds incredible volume and length without clumping. Smudge-proof and long-lasting.</p>
+                        <p class="product-price">$23.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                         <img src="{{ url_for('static', filename='images/c7.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Precision Liquid Eyeliner</h4>
+                        <p class="product-category">Eyeliner</p>
+                        <p class="product-description">Ultra-fine tip for precise application. Waterproof formula that stays all day.</p>
+                        <p class="product-price">$19.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/c8.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Brow Defining Gel</h4>
+                        <p class="product-category">Brow Product</p>
+                        <p class="product-description">Tinted gel that fills, defines, and holds brows in place all day long.</p>
+                        <p class="product-price">$22.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2>Lip Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/c9.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Creamy Matte Lipstick</h4>
+                        <p class="product-category">Lipstick</p>
+                        <p class="product-description">Comfortable matte finish with intense color payoff. Doesn't dry out lips.</p>
+                        <p class="product-price">$21.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/c10.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">High Shine Lip Gloss</h4>
+                        <p class="product-category">Lip Gloss</p>
+                        <p class="product-description">Non-sticky formula with incredible shine. Hydrating and comfortable to wear.</p>
+                        <p class="product-price">$18.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                     <img src="{{ url_for('static', filename='images/c11.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Precision Lip Liner</h4>
+                        <p class="product-category">Lip Liner</p>
+                        <p class="product-description">Creamy, long-wearing lip liner that prevents feathering and bleeding.</p>
+                        <p class="product-price">$16.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='images/c12.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Hydrating Lip Balm</h4>
+                        <p class="product-category">Lip Care</p>
+                        <p class="product-description">Ultra-hydrating formula with a hint of tint. Perfect for daily lip care.</p>
+                        <p class="product-price">$14.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="looks">
+            <h2>Makeup Looks & Tutorials</h2>
+            <div class="look-container">
+                <div class="look-card">
+                    <h3>Everyday Natural Makeup</h3>
+                    <p>A fresh, polished look that enhances your natural features:</p>
+                    <ol>
+                        <li>Start with a lightweight foundation or tinted moisturizer</li>
+                        <li>Conceal only where needed (under eyes, blemishes)</li>
+                        <li>Add a touch of blush to the apples of cheeks</li>
+                        <li>Define brows with a light hand</li>
+                        <li>Apply neutral eyeshadow and mascara</li>
+                        <li>Finish with a natural lip color</li>
+                    </ol>
+                </div>
+                <div class="look-card">
+                    <h3>Classic Smokey Eye</h3>
+                    <p>A timeless evening look that adds drama and definition:</p>
+                    <ol>
+                        <li>Apply a neutral base shade across the lid</li>
+                        <li>Define the crease with a medium-tone shadow</li>
+                        <li>Blend a dark shadow on the outer corner and along lashline</li>
+                        <li>Add highlighter to inner corner and brow bone</li>
+                        <li>Line upper and lower lashlines (smudge for softness)</li>
+                        <li>Apply several coats of mascara or add false lashes</li>
+                        <li>Balance with neutral lip color</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Makeup Guide | Your resource for makeup products and techniques</p>
+    </footer>
+
+    <script>
+        // Simple cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let cartCount = 0;
+            const cartCountElement = document.querySelector('.cart-count');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartCount++;
+                    cartCountElement.textContent = cartCount;
+                    
+                    // Get product info
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    
+                    // Show confirmation
+                    alert(`Added to cart: ${productName} (${productPrice})`);
+                    
+                    // Change button text briefly
+                    const originalText = this.textContent;
+                    this.textContent = 'Added!';
+                    this.style.backgroundColor = '#5a9e5a';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = '';
+                    }, 1000);
+                });
+            });
+            
+            // Cart icon click
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.addEventListener('click', function() {
+                if (cartCount === 0) {
+                    alert('Your cart is empty');
+                } else {
+                    alert(`You have ${cartCount} items in your cart`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

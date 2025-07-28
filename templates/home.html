@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 80px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .top-nav-left, .top-nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .top-nav-left a {
+            margin-right: 25px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .top-nav-right a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #6c757d;
+        }
+        
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .main-menu {
+            display: flex;
+        }
+        
+        .main-menu a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .main-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color:#6610f2;
+            transition: width 0.3s ease;
+        }
+        
+        .main-menu a:hover:after {
+            width: 100%;
+        }
+        
+        .demo-btn {
+            background-color:#6610f2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            background-color: #6610f2;
+        }
+        
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 80px;
+            background: linear-gradient(135deg,  #dfb899 0%, #6610f2 100%);
+            color: white;
+            height: 500px;
+        }
+        
+        .hero-text {
+            width: 50%;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text h1 span {
+            color: rgba(102,16,242,0.8);
+        }
+        
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 80%;
+        }
+        
+        .hero-image {
+            width: 50%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .cube-image {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: #0d6efd;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+ 
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chatbot-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #6610f2, #d63384);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+            box-shadow: 0 8px 25px rgba(102, 16, 242, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 16, 242, 0.6);
+        }
+
+        .chatbot-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .chatbot-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            z-index: 1;
+            object-fit: cover;
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 400px;
+            height: 550px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0) translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .chatbot-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #6610f2, #d63384);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: headerGlow 3s infinite;
+        }
+
+        @keyframes headerGlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-title h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            height: 350px;
+            overflow-y: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(248,249,250,0.1));
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6610f2, #d63384);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: messageSlide 0.5s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.bot {
+            text-align: left;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #6610f2, #d63384);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.bot .message-bubble {
+            background: rgba(108, 117, 125, 0.1);
+            color: #333;
+            border-bottom-left-radius: 5px;
+            border: 1px solid rgba(108, 117, 125, 0.2);
+        }
+
+        .chatbot-input {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .message-input:focus {
+            border-color: #6610f2;
+            box-shadow: 0 0 20px rgba(102, 16, 242, 0.3);
+            background: white;
+        }
+
+        .send-btn {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6610f2, #d63384);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 16, 242, 0.4);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 16, 242, 0.6);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 12px 18px;
+            background: rgba(108, 117, 125, 0.1);
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #6c757d;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            padding: 8px 16px;
+            background: rgba(102, 16, 242, 0.1);
+            border: 1px solid rgba(102, 16, 242, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6610f2;
+        }
+
+        .quick-action:hover {
+            background: rgba(102, 16, 242, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chatbot-window {
+                width: 350px;
+                height: 500px;
+            }
+            
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+   
+        .primary-btn:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 80px 0 40px;
+            font-size: 2.5rem;
+            color: #343a40;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin: -30px 0 50px;
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 80px;
+            margin-bottom: 80px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            height: 300px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-image {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .feature-content {
+            padding: 20px;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+        
+        .feature-content p {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        .feature-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,  #dfb899, rgba(102,16,242,0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .feature-overlay p {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .explore-btn {
+            background-color: white;
+            color: #0d6efd;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-overlay {
+            opacity: 1;
+        }
+        
+        .testimonials {
+            background-color: #f8f9fa;
+            padding: 80px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            color: #495057;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: #343a40;
+        }
+        
+        .author-info p {
+            margin: 5px 0 0;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #dfb899 0%, #6610f2 100%);
+            color: white;
+            padding: 80px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer {
+            background-color: #212529;
+            color: white;
+            padding: 60px 80px 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-about {
+            color: #adb5bd;
+            margin-bottom: 20px;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            background-color: #343a40;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: #dfb899;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #343a40;
+            display: flex;
+            justify-content: space-between;
+            color: #adb5bd;
+            font-size: 0.85rem;
+        }
+        
+        .footer-bottom-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <script>
+  
+
+        class ChatBot {
+            constructor() {
+                this.isOpen = false;
+                this.isDragging = false;
+                this.dragOffset = { x: 0, y: 0 };
+                this.messageCount = 0;
+                this.responses = {
+                    'services': 'I can help you with: Product information, Technical support, Order assistance, and General inquiries. What would you like to know?',
+                    'help': 'I\'m here to assist you! You can ask me about our services, products, pricing, or any other questions you might have.',
+                    'contact': 'You can reach our support team at support@company.com or call us at +1-234-567-8900. I\'m also here to help right now!',
+                    'pricing': 'Our pricing varies by service. Could you let me know which specific service you\'re interested in so I can provide accurate pricing information?',
+                    'hello': 'Hello! Great to meet you! How can I assist you today? 😊',
+                    'default': 'That\'s an interesting question! Let me help you with that. Could you provide a bit more detail so I can give you the best assistance?'
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.startWelcomeSequence();
+            }
+
+            bindEvents() {
+                const icon = document.getElementById('chatbotIcon');
+                const closeBtn = document.getElementById('closeBtn');
+                const sendBtn = document.getElementById('sendBtn');
+                const input = document.getElementById('messageInput');
+
+                // Icon click to toggle
+                icon.addEventListener('click', (e) => {
+                    if (!this.isDragging) {
+                        this.toggleChat();
+                    }
+                });
+
+                // Dragging functionality
+                icon.addEventListener('mousedown', this.startDrag.bind(this));
+                document.addEventListener('mousemove', this.drag.bind(this));
+                document.addEventListener('mouseup', this.stopDrag.bind(this));
+
+                // Touch events for mobile
+                icon.addEventListener('touchstart', this.startDrag.bind(this));
+                document.addEventListener('touchmove', this.drag.bind(this));
+                document.addEventListener('touchend', this.stopDrag.bind(this));
+
+                // Close button
+                closeBtn.addEventListener('click', () => this.toggleChat());
+
+                // Send message
+                sendBtn.addEventListener('click', () => this.sendMessage());
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            }
+
+            startDrag(e) {
+                this.isDragging = true;
+                const icon = document.getElementById('chatbotIcon');
+                const rect = icon.getBoundingClientRect();
+                const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+                
+                this.dragOffset.x = clientX - rect.left;
+                this.dragOffset.y = clientY - rect.top;
+                
+                icon.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
+
+            drag(e) {
+                if (!this.isDragging) return;
+                
+                const container = document.getElementById('chatbotContainer');
+                const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+                
+                const x = clientX - this.dragOffset.x;
+                const y = clientY - this.dragOffset.y;
+                
+                // Boundary constraints
+                const maxX = window.innerWidth - 70;
+                const maxY = window.innerHeight - 70;
+                
+                const constrainedX = Math.max(0, Math.min(x, maxX));
+                const constrainedY = Math.max(0, Math.min(y, maxY));
+                
+                container.style.left = constrainedX + 'px';
+                container.style.top = constrainedY + 'px';
+                container.style.right = 'auto';
+                container.style.bottom = 'auto';
+                
+                e.preventDefault();
+            }
+
+            stopDrag() {
+                if (this.isDragging) {
+                    setTimeout(() => {
+                        this.isDragging = false;
+                    }, 100);
+                    
+                    const icon = document.getElementById('chatbotIcon');
+                    icon.style.cursor = 'move';
+                }
+            }
+
+            toggleChat() {
+                const window = document.getElementById('chatbotWindow');
+                const badge = document.getElementById('notificationBadge');
+                
+                this.isOpen = !this.isOpen;
+                
+                if (this.isOpen) {
+                    window.classList.add('active');
+                    badge.style.display = 'none';
+                    this.scrollToBottom();
+                } else {
+                    window.classList.remove('active');
+                }
+            }
+
+            sendMessage() {
+                const input = document.getElementById('messageInput');
+                const message = input.value.trim();
+                
+                if (!message) return;
+                
+                this.addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing indicator
+                this.showTyping();
+                
+                // Simulate response delay
+                setTimeout(() => {
+                    this.hideTyping();
+                    this.generateResponse(message);
+                }, 1000 + Math.random() * 1000);
+            }
+
+            addMessage(text, sender) {
+                const messagesContainer = document.getElementById('chatbotMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                const bubbleDiv = document.createElement('div');
+                bubbleDiv.className = 'message-bubble';
+                bubbleDiv.textContent = text;
+                
+                messageDiv.appendChild(bubbleDiv);
+                messagesContainer.appendChild(messageDiv);
+                
+                this.scrollToBottom();
+                this.messageCount++;
+            }
+
+            generateResponse(userMessage) {
+                const lowerMessage = userMessage.toLowerCase();
+                let response = this.responses.default;
+                
+                // Simple keyword matching
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    response = this.responses.hello;
+                } else if (lowerMessage.includes('service') || lowerMessage.includes('what can you do')) {
+                    response = this.responses.services;
+                } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                    response = this.responses.help;
+                } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+                    response = this.responses.contact;
+                } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {
+                    response = this.responses.pricing;
+                }
+                
+                this.addMessage(response, 'bot');
+            }
+
+            showTyping() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                typingIndicator.style.display = 'block';
+                this.scrollToBottom();
+            }
+
+            hideTyping() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                typingIndicator.style.display = 'none';
+            }
+
+            scrollToBottom() {
+                const messagesContainer = document.getElementById('chatbotMessages');
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            startWelcomeSequence() {
+                // Show notification badge after 3 seconds
+                setTimeout(() => {
+                    const badge = document.getElementById('notificationBadge');
+                    badge.style.display = 'flex';
+                }, 3000);
+            }
+        }
+
+        // Quick message function
+        function sendQuickMessage(message) {
+            const input = document.getElementById('messageInput');
+            input.value = message;
+            chatbot.sendMessage();
+        }
+
+        // Initialize chatbot when page loads
+        let chatbot;
+        document.addEventListener('DOMContentLoaded', () => {
+            chatbot = new ChatBot();
+        });
+
+        // Prevent context menu on chatbot icon
+        document.getElementById('chatbotIcon').addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+    </script>
+
+    <!-- Interactive Chatbot -->
+    
+   
+    
+    <div class="main-nav">
+        <a href="#" class="logo">Glam Loop</a>
+        <div class="main-menu">
+            <a href="/platform">Platform</a>
+            <a href="/service">Services</a>
+            <a href="/resources">Resources</a>
+            
+        </div>
+
+    </div>
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-icon" id="chatbotIcon">
+            <div class="notification-badge" id="notificationBadge">1</div>
+     <img src="{{ url_for('static', filename='images/possessed-photography-JjGXjESMxOY-unsplash.jpg') }}" alt="Download Image" width="400">
+
+
+        </div>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <h3>AI Assistant</h3>
+                    <div class="status-indicator"></div>
+                </div>
+                <button class="close-btn" id="closeBtn">&times;</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    <div class="message-bubble">
+                        Hi! I'm your AI assistant 🤖 How can I help you today?
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <div class="quick-action" onclick="sendQuickMessage('Tell me about your services')">🔍 Services</div>
+                    <div class="quick-action" onclick="sendQuickMessage('I need help')">❓ Help</div>
+                    <div class="quick-action" onclick="sendQuickMessage('Contact support')">📞 Contact</div>
+                    <div class="quick-action" onclick="sendQuickMessage('Pricing info')">💰 Pricing</div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <div class="input-container">
+                    <input type="text" class="message-input" id="messageInput" placeholder="Type your message..." maxlength="500">
+                    <button class="send-btn" id="sendBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Discover Beauty product<br> <span>—all in one place</span></h1>
+            <p>A one-stop online store offering elegant jewelry and premium beauty products to help you shine inside and out</p>
+            <div class="cta-buttons">
+                <a href="/signup" class="primary-btn">START  SHOPPING</a>
+                <a href="/about" class="secondary-btn">EXPLORE FEATURES</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/download.jpg') }}" alt="Download Image" width="400">
+        </div>
+    </div>
+    
+    <h2 class="section-title">Explore Our Platform</h2>
+    <p class="section-subtitle">Discover the comprehensive features that power thousands of successful online stores worldwide</p>
+    
+    <div class="features-grid">
+        <!-- Product Listing Page Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/images.jpg') }}" alt="Download Image" width="300">
+            <div class="feature-content">
+                <h3>Product Listings</h3>
+                <p>Display your products beautifully with customizable catalog pages</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>Product Listing Page</h3>
+                <p>Create stunning product catalogs with advanced filtering, sorting, and category management</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+        
+        <!-- Product Detail Page Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/a.jpg') }}" alt="Download Image" width="300">
+            <div class="feature-content">
+                <h3>Product Details</h3>
+                <p>Showcase your products with high-quality images and detailed descriptions</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>Product Detail Page</h3>
+                <p>Convert browsers to buyers with compelling product pages featuring images, videos, and reviews</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+        
+        <!-- Shopping Cart Page Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/download7.png') }}" alt="Download Image" width="200">
+            <div class="feature-content">
+                <h3>Shopping Cart</h3>
+                <p>Streamlined cart experience with cross-sell and upsell opportunities</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>Shopping Cart Page</h3>
+                <p>Minimize abandonment with a frictionless cart experience that encourages additional purchases</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+        
+        <!-- Checkout Page Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/er7.png') }}" alt="Download Image" width="200">
+            <div class="feature-content">
+                <h3>Checkout Process</h3>
+                <p>Optimized checkout flow with multiple payment options</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>Checkout Page</h3>
+                <p>Boost conversion rates with a streamlined, mobile-friendly checkout process and diverse payment methods</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+        
+        <!-- User Account Page Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/b.png') }}" alt="Download Image" width="300">
+            <div class="feature-content">
+                <h3>User Accounts</h3>
+                <p>Personalized customer dashboards for order tracking and management</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>User Profile Pages</h3>
+                <p>Give customers control with comprehensive account management, order history, and wishlist features</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+        
+        <!-- Admin Dashboard Card -->
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/c.png') }}" alt="Download Image" width="200">
+            <div class="feature-content">
+                <h3>Admin Dashboard</h3>
+                <p>Powerful store management with intuitive controls and analytics</p>
+            </div>
+            <div class="feature-overlay">
+                <h3>Admin Dashboard</h3>
+                <p>Take control of your business with comprehensive analytics, inventory management, and marketing tools</p>
+                <a href="#" class="explore-btn">EXPLORE</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"BigCommerce transformed our online presence. Sales increased by 40% in the first quarter after migration, and the platform's scalability has supported our continued growth."</p>
+                <div class="testimonial-author">
+                    <img src="{{ url_for('static', filename='images/profile3.jpg') }}" alt="Download Image" width="100">          <div class="author-info">
+                        <h4>Jane Doe</h4>
+                        <p>CEO, Fashion Retailer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The customization options are incredible. We've been able to create a unique shopping experience that truly represents our brand while maintaining high performance."</p>
+                <div class="testimonial-author">
+                    <img src="{{ url_for('static', filename='images/profile2.jpg') }}" alt="Download Image" width="100">  
+                           
+                    <div class="author-info">
+                        <h4>John Smith</h4>
+                        <p>Marketing Director, Electronics Store</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"BigCommerce's multi-channel selling capabilities have allowed us to expand to marketplaces and social platforms seamlessly, growing our revenue by 65% year-over-year."</p>
+                <div class="testimonial-author">
+                    <img src="{{ url_for('static', filename='images/profile1.jpg') }}" alt="Download Image" width="100">       
+                    <div class="author-info">
+                        <h4>Maria Garcia</h4>
+                        <p>Founder, Home Goods Company</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cta-section">
+        <h2>Ready to Start Your Ecommerce Journey?</h2>
+        <p>Join thousands of successful businesses powering their online stores with BigCommerce</p>
+        <div class="cta-buttons">
+            <a href="#" class="primary-btn">START FREE TRIAL</a>
+            <a href="#" class="secondary-btn">TALK TO AI CHAT</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <a href="#" class="footer-logo">Glam Glow</a>
+                <p class="footer-about">The leading ecommerce platform that empowers businesses of all sizes to build, innovate and grow.</p>
+                <div class="footer-social">
+                    <a href="#">F</a>
+                    <a href="#">T</a>
+                    <a href="#">I</a>
+                    <a href="#">L</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Know About us</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="#">Enterprise</a></li>
+                 
+                </ul>
+            </div>
+        
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="/contact">Contact</a></li>
+                
+              
+                    <li><a href="#">Partners</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 . All right Glam Glow's reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

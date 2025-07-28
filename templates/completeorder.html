@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 auto 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmarkPop 0.6s ease-in-out;
+        }
+
+        .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        @keyframes checkmarkPop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .order-number {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .delivery-info {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .delivery-info h3 {
+            color: #1976d2;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .truck-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .delivery-text {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .contact-info p {
+            color: #856404;
+            margin: 5px 0;
+        }
+
+        .button {
+            background: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background: #218838;
+            transform: scale(1.02);
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .button.secondary {
+            background: #6c757d;
+        }
+
+        .button.secondary:hover {
+            background: #5a6268;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .checkmark {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .checkmark::after {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkmark"></div>
+        
+        <h1>Order Confirmed!</h1>
+        
+        <div class="order-number">
+            <strong id="orderNumber">Order #12345-ABC-789</strong><br>
+            Placed on May 20, 2025
+        </div>
+
+        <div class="delivery-info">
+            <h3>
+                <span class="truck-icon">🚚</span>
+                Delivery Information
+            </h3>
+         <div class="delivery-text">
+    <p><strong>Your order will be delivered in a few days!</strong></p>
+    <p id="expected-delivery"></p>
+    <p>We'll send you a tracking number via email once your order ships.</p>
+</div>
+
+<script>
+    const today = new Date();
+    const future = new Date();
+    future.setDate(today.getDate() + 15);
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const deliveryText = `Expected delivery: <strong>${today.toLocaleDateString('en-US', options)} - ${future.toLocaleDateString('en-US', options)}</strong>`;
+    document.getElementById("expected-delivery").innerHTML = deliveryText;
+</script>
+
+        </div>
+
+        <div class="contact-info">
+            <p><strong>📧 Email:</strong> support@yourstore.com</p>
+            <p><strong>📞 Phone:</strong> 1-800-123-4567</p>
+            <p><strong>Questions?</strong> Contact our customer service team</p>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button class="button" onclick="trackOrder()">Track Order</button>
+            <button class="button secondary" onclick="continueShopping()">Continue Shopping</button>
+        </div>
+
+        <div style="margin-top: 20px; color: #666; font-size: 14px;">
+            <p>Thank you for your business! 🎉</p>
+        </div>
+    </div>
+
+    <script>
+        // Generate unique order number that changes each time
+        function generateOrderNumber() {
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 1000);
+            const orderNum = (timestamp + random).toString().slice(-8);
+            return `Order #${orderNum.slice(0,5)}-${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${String.fromCharCode(65 + Math.floor(Math.random() * 26))}-${orderNum.slice(5)}`;
+        }
+
+        function trackOrder() {
+            const orderNumber = document.getElementById('orderNumber').textContent;
+            alert(`Tracking information for ${orderNumber} will be sent to your email shortly!`);
+        }
+
+        function continueShopping() {
+            // You can change this URL to match your actual shop page
+            window.location.href = '/shop';
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set unique order number
+            document.getElementById('orderNumber').textContent = generateOrderNumber();
+
+            // Add a subtle animation to the container
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

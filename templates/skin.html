@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Care Guide</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #dfb899 0%, #6610f2 100%);
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #e0d9d0;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #8e6b8e;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #8e6b8e;
+            font-size: 1.8rem;
+            margin-top: 40px;
+            border-bottom: 1px solid #e0d9d0;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #8a7e66;
+            font-size: 1.4rem;
+        }
+        .navbar {
+            background-color: #8e6b8e;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #7a5c7a;
+        }
+        .navbar a.active {
+            background-color: #7a5c7a;
+        }
+        .products-section {
+            margin-top: 40px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-details {
+            padding: 15px;
+        }
+        .product-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8e6b8e;
+            margin: 0 0 5px 0;
+        }
+        .product-category {
+            color: #8a7e66;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .add-to-cart {
+            background-color: #8e6b8e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #7a5c7a;
+        }
+        .routine-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .routine-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            text-decoration: none;
+            color: #333;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #8e6b8e;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+            border-top: 1px solid #e0d9d0;
+        }
+    </style>
+</head>
+<body>
+    <a href="/cart" class="cart-icon">
+        <div class="cart-count">0</div>
+        🛒
+    </a>
+
+    <header>
+        <h1>Skin Care Guide</h1>
+        <p>Your complete resource for quality skin care products and routines</p>
+    </header>
+    
+    <div class="navbar">
+        <a href="/skin" class="active">Skin Care</a>
+        <a href="/hair">Hair Care</a>
+        <a href="/makeup">Makeup</a>
+    </div>
+
+    <main>
+        <section id="intro">
+            <h2>Skin Care Essentials</h2>
+            <p>Healthy, glowing skin starts with a consistent skin care routine using quality products that address your specific needs. Explore our curated collection of skin care essentials for every skin type and concern.</p>
+        </section>
+
+        <section class="products-section">
+            <h2>Cleansers</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                          <img src="{{ url_for('static', filename='images/a1.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Gentle Foaming Cleanser</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Effectively removes dirt, oil and makeup without stripping the skin's natural moisture.</p>
+                        <p class="product-price">$24.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/a2.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Deep Cleansing Oil</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Dissolves stubborn makeup and sunscreen while nourishing the skin. Perfect first step in a double cleanse routine.</p>
+                        <p class="product-price">$28.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='images/a3.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Exfoliating Gel Cleanser</h4>
+                        <p class="product-category">Oily/Combination Skin</p>
+                        <p class="product-description">Gentle exfoliating beads remove dead skin cells while salicylic acid helps clear pores.</p>
+                        <p class="product-price">$26.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                          <img src="{{ url_for('static', filename='images/a4.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Hydrating Cream Cleanser</h4>
+                        <p class="product-category">Dry/Sensitive Skin</p>
+                        <p class="product-description">Creamy, non-foaming formula that cleanses while adding moisture to dry or sensitive skin.</p>
+                        <p class="product-price">$22.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2>Treatments & Serums</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/a5.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Brightening Vitamin C Serum</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Potent 15% vitamin C formula that brightens skin tone, fights free radicals, and boosts collagen production.</p>
+                        <p class="product-price">$48.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                         <img src="{{ url_for('static', filename='images/a6.png') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Hydrating Hyaluronic Acid</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Multi-molecular hyaluronic acid complex that intensely hydrates all layers of the skin.</p>
+                        <p class="product-price">$35.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                      <img src="{{ url_for('static', filename='images/a7.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Advanced Retinol Serum</h4>
+                        <p class="product-category">Anti-Aging</p>
+                        <p class="product-description">Encapsulated retinol that reduces fine lines and wrinkles while minimizing irritation.</p>
+                        <p class="product-price">$54.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/a8.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Pore-Refining Niacinamide</h4>
+                        <p class="product-category">Oily/Combination Skin</p>
+                        <p class="product-description">10% niacinamide (vitamin B3) serum that reduces pore appearance and balances oil production.</p>
+                        <p class="product-price">$32.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2>Moisturizers & SPF</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/a9.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Oil-Free Gel Moisturizer</h4>
+                        <p class="product-category">Oily/Combination Skin</p>
+                        <p class="product-description">Lightweight gel formula that hydrates without clogging pores or adding shine.</p>
+                        <p class="product-price">$29.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                       <img src="{{ url_for('static', filename='images/a10.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Ultra-Rich Cream</h4>
+                        <p class="product-category">Dry/Mature Skin</p>
+                        <p class="product-description">Deeply nourishing cream with ceramides and peptides to restore and strengthen the skin barrier.</p>
+                        <p class="product-price">$42.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                                              <img src="{{ url_for('static', filename='images/a11.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Invisible Shield SPF 50</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Broad-spectrum protection that's lightweight and truly invisible on all skin tones.</p>
+                        <p class="product-price">$34.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+<img src="{{ url_for('static', filename='images/a12.jpg') }}" alt="Download Image" width="400">
+                    </div>
+                    <div class="product-details">
+                        <h4 class="product-name">Overnight Recovery Cream</h4>
+                        <p class="product-category">All Skin Types</p>
+                        <p class="product-description">Intensely regenerating night treatment that works while you sleep for renewed skin by morning.</p>
+                        <p class="product-price">$39.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="routines">
+            <h2>Recommended Skin Care Routines</h2>
+            <div class="routine-container">
+                
+                <div class="routine-card">
+                    <h3>Morning Routine</h3>
+                    <p>Start your day with this simple yet effective routine:</p>
+                    <ol>
+                        <li>Cleanse with a gentle foaming or cream cleanser</li>
+                        <li>Apply antioxidant serum (Vitamin C recommended)</li>
+                        <li>Hydrate with hyaluronic acid (if needed)</li>
+                        <li>Moisturize with a lightweight day cream</li>
+                        <li>Finish with broad-spectrum SPF 30+ (essential!)</li>
+                    </ol>
+                </div>
+                <div class="routine-card">
+                    <h3>Evening Routine</h3>
+                    <p>Wind down with this restorative nighttime routine:</p>
+                    <ol>
+                        <li>Remove makeup with cleansing oil/balm</li>
+                        <li>Follow with a water-based cleanser (double cleanse)</li>
+                        <li>Apply treatment serums (retinol, niacinamide, etc.)</li>
+                        <li>Add hydration with essence or hyaluronic acid</li>
+                        <li>Lock in moisture with a richer night cream</li>
+                        <li>Add targeted treatments for specific concerns (optional)</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="routine-container" style="margin-top: 20px;">
+                <div class="routine-card">
+                    <h3>Weekly Treatments</h3>
+                    <p>Boost your routine with these 1-2 times weekly treatments:</p>
+                    <ul>
+                        <li><strong>Exfoliation:</strong> Use chemical exfoliants (AHA/BHA) or gentle physical scrubs to remove dead skin cells</li>
+                        <li><strong>Face Masks:</strong> Choose hydrating, purifying, or brightening masks depending on your skin's needs</li>
+                        <li><strong>Deep Treatments:</strong> Consider treatments like at-home peels or intensive serums for specific concerns</li>
+                    </ul>
+                    <p><strong>Tip:</strong> Don't use retinol on the same night as exfoliating treatments</p>
+                </div>
+                <div class="routine-card">
+                    <h3>Skin Care By Type</h3>
+                    <p>Adjust your routine based on your skin type:</p>
+                    <ul>
+                        <li><strong>Oily/Acne-Prone:</strong> Focus on non-comedogenic products, gentle exfoliation, and oil-control</li>
+                        <li><strong>Dry Skin:</strong> Emphasize hydration layers, avoid harsh ingredients, and use richer moisturizers</li>
+                        <li><strong>Sensitive Skin:</strong> Minimize ingredient lists, avoid fragrances and alcohol, introduce new products slowly</li>
+                        <li><strong>Combination Skin:</strong> Consider multi-masking and targeted treatments for different areas</li>
+                        <li><strong>Mature Skin:</strong> Prioritize hydration, antioxidants, and gentle retinol products</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Skin Care Guide | Your resource for quality skin care products and routines</p>
+    </footer>
+
+    <script>
+        // Simple cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let cartCount = 0;
+            const cartCountElement = document.querySelector('.cart-count');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartCount++;
+                    cartCountElement.textContent = cartCount;
+                    
+                    // Get product info
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    
+                    // Show confirmation
+                    alert(`Added to cart: ${productName} (${productPrice})`);
+                    
+                    // Change button text briefly
+                    const originalText = this.textContent;
+                    this.textContent = 'Added!';
+                    this.style.backgroundColor = '#5a9e5a';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = '';
+                    }, 1000);
+                });
+            });
+            
+            // Cart icon click
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.addEventListener('click', function(e) {
+                // This will still run if JavaScript is enabled and the user clicks
+                // before the page navigates to cart.html
+                if (cartCount === 0) {
+                    alert('Your cart is empty');
+                } else {
+                    alert(`You have ${cartCount} items in your cart`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
